@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wonderful Veggie · Staff & Owner Admin</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .admin-wrap { max-width: 1120px; margin: 1.5rem auto; padding: 0 1rem; }
+    .login-box { max-width: 400px; margin: 5rem auto; background: #fff; padding: 2rem; border-radius: 14px; border: 1px solid var(--border); text-align: center; }
+    .admin-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; background: var(--crimson-dark); color: #fff; padding: 1.1rem 1.4rem; border-radius: 14px; margin-bottom: 1.25rem; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.25rem; background: #fff; padding: 1rem; border-radius: 12px; border: 1px solid var(--border); }
+    .admin-row { display: grid; grid-template-columns: 75px 1fr auto; gap: 0.85rem; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 0.85rem; margin-bottom: 0.65rem; }
+    .thumb-preview { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; background: var(--cream-alt); border: 1px solid var(--border); }
+    .row-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: flex-end; }
+    .move-btn { padding: 0.35rem 0.55rem; font-size: 0.78rem; border-radius: 6px; border: 1px solid var(--border); background: var(--cream); cursor: pointer; font-weight: 700; }
+    .move-btn:hover { background: var(--gold-soft); }
+    .status-banner { padding: 0.75rem 1rem; border-radius: 10px; margin-bottom: 1rem; font-size: 0.9rem; font-weight: 600; background: #fff3cd; border: 1px solid #ffe69c; color: #664d03; }
+  </style>
+</head>
+<body>
+
+  <!-- Firebase Authentication Gate -->
+  <div id="auth-gate" class="login-box">
+    <div class="hero-medallions" style="justify-content:center;"><span>满</span><span>福</span><span>德</span></div>
+    <h2>Staff &amp; Owner Admin</h2>
+    <p style="color:var(--muted);margin:0.5rem 0 1.2rem;">Sign in with an authorized Gmail account to manage menu, prices, photos &amp; CNY packages.</p>
+
+    <button id="google-login-btn" class="btn btn-primary btn-full" type="button">
+      Sign In with Google (Gmail)
+    </button>
+
+    <div style="margin:0.9rem 0;font-size:0.82rem;color:var(--muted);">— OR SIGN IN WITH EMAIL &amp; PASSWORD —</div>
+
+    <form id="email-login-form" style="text-align:left;">
+      <div class="form-group">
+        <label for="admin-email">Authorized Gmail</label>
+        <input type="email" id="admin-email" placeholder="yourname@gmail.com" required />
+      </div>
+      <div class="form-group">
+        <label for="admin-pass">Password</label>
+        <input type="password" id="admin-pass" placeholder="Enter Password" required />
+      </div>
+      <button type="submit" class="btn btn-outline btn-full">Sign In with Password</button>
+    </form>
+
+    <p id="auth-error" style="color:#b71c1c;font-size:0.82rem;margin-top:0.75rem;"></p>
+  </div>
+
+  <!-- Main Admin Dashboard -->
+  <div id="admin-panel" class="admin-wrap" style="display:none;">
+    <div class="admin-top">
+      <div>
+        <strong>满福德素食馆 · Wonderful Veggie Admin</strong>
+        <div id="sync-status" style="font-size:0.82rem;opacity:0.9;">Checking database mode...</div>
+        <div id="signed-in-user" style="font-size:0.78rem;color:var(--gold);margin-top:0.15rem;"></div>
+      </div>
+      <div style="display:flex;gap:0.5rem;">
+        <a href="index.html" class="btn btn-gold btn-sm">View Live Site</a>
+        <button id="logout-btn" class="btn btn-outline-light btn-sm" type="button">Sign Out</button>
+      </div>
+    </div>
+
+    <div id="firebase-notice" class="status-banner" style="display:none;">
+      Running in <strong>Local Browser Mode</strong>. Paste your Firebase keys in <code>js/firebase-config.js</code> to enable cloud sync across phones &amp; PCs.
+    </div>
+
+    <!-- Unified Backup, Seed & View Switcher -->
+    <div class="toolbar">
+      <button type="button" class="btn btn-primary btn-sm" id="tab-manage-menu">🍽️ Menu Items</button>
+      <button type="button" class="btn btn-gold btn-sm" id="tab-manage-pkgs">🧧 Festive / CNY Packages</button>
+      <button type="button" class="btn btn-outline btn-sm" id="add-new-dish-btn">+ Add New Dish</button>
+      <button type="button" class="btn btn-outline btn-sm" id="seed-cloud-btn">☁️ Seed / Sync Full Menu to Cloud</button>
+      <button type="button" class="btn btn-outline btn-sm" id="export-js-btn">💾 Export menu-data.js</button>
+      <button type="button" class="btn btn-outline btn-sm" id="export-json-btn">📦 Backup JSON</button>
+      <label class="btn btn-outline btn-sm" style="margin:0;cursor:pointer;">
+        📥 Restore JSON
+        <input type="file" id="restore-json-input" accept=".json" style="display:none;" />
+      </label>
+    </div>
+
+    <!-- SECTION A: MENU EDITOR -->
+    <div id="menu-manager-view">
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:1rem;">
+        <input type="search" id="admin-search" placeholder="Filter by code, Chinese or English name..." style="max-width:340px;" />
+        <select id="admin-cat-filter" style="max-width:220px;">
+          <option value="all">All Categories</option>
+          <option value="signatures">Chef Specials</option>
+          <option value="dishes">Sharing Dishes &amp; Tofu</option>
+          <option value="snacks">Snacks &amp; Sides</option>
+          <option value="rice">Rice Dishes</option>
+          <option value="noodles">Noodles &amp; Pasta</option>
+          <option value="beverages">Beverages &amp; Tea</option>
+        </select>
+      </div>
+      <div id="admin-menu-list"></div>
+    </div>
+
+    <!-- SECTION B: CNY / FESTIVE PACKAGES EDITOR -->
+    <div id="pkg-manager-view" style="display:none;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h3>Festive &amp; CNY Packages (节庆套餐)</h3>
+        <button type="button" id="add-new-pkg-btn" class="btn btn-primary btn-sm">+ Add New Package</button>
+      </div>
+      <div id="admin-pkg-list"></div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Dish Modal -->
+  <div id="dish-modal" class="modal hidden">
+    <div class="modal-card" style="max-height:92vh;overflow-y:auto;">
+      <button type="button" id="close-dish-modal" class="modal-close">&times;</button>
+      <h3 id="dish-modal-title">Edit Dish</h3>
+      <form id="dish-form" style="margin-top:0.8rem;">
+        <input type="hidden" id="edit-dish-id" />
+        <div class="form-row">
+          <div class="form-group">
+            <label>Item Code</label>
+            <input type="text" id="edit-code" placeholder="e.g. R12" required />
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="edit-category">
+              <option value="signatures">Chef Specials</option>
+              <option value="dishes">Sharing Dishes &amp; Tofu</option>
+              <option value="snacks">Snacks &amp; Sides</option>
+              <option value="rice">Rice Dishes</option>
+              <option value="noodles">Noodles &amp; Pasta</option>
+              <option value="beverages">Beverages &amp; Tea</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Chinese Name (中文名)</label>
+          <input type="text" id="edit-name-zh" required />
+        </div>
+        <div class="form-group">
+          <label>English Name</label>
+          <input type="text" id="edit-name-en" required />
+        </div>
+
+        <div class="form-group">
+          <label>Pricing Type</label>
+          <select id="edit-price-type">
+            <option value="single">Single Price (单一价格)</option>
+            <option value="sb">Small S(小) &amp; Big B(大)</option>
+            <option value="drink">Beverage (Small Hot / Big Hot / Cold)</option>
+          </select>
+        </div>
+
+        <div id="price-fields-single" class="form-group">
+          <label>Price (RM)</label>
+          <input type="number" step="0.10" id="edit-price-single" />
+        </div>
+
+        <div id="price-fields-sb" class="form-row" style="display:none;">
+          <div class="form-group">
+            <label>Small S(小) RM</label>
+            <input type="number" step="0.10" id="edit-price-s" />
+          </div>
+          <div class="form-group">
+            <label>Big B(大) RM</label>
+            <input type="number" step="0.10" id="edit-price-b" />
+          </div>
+        </div>
+
+        <div id="price-fields-drink" class="form-row" style="display:none;grid-template-columns:1fr 1fr 1fr;">
+          <div class="form-group">
+            <label>小热 RM</label>
+            <input type="number" step="0.10" id="edit-price-hs" />
+          </div>
+          <div class="form-group">
+            <label>大热 RM</label>
+            <input type="number" step="0.10" id="edit-price-hb" />
+          </div>
+          <div class="form-group">
+            <label>冰 Cold RM</label>
+            <input type="number" step="0.10" id="edit-price-cold" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Dietary / Spice</label>
+            <select id="edit-spicy">
+              <option value="0">Not Spicy (不辣)</option>
+              <option value="1">Mild Spicy 🌶️</option>
+              <option value="2">Spicy 🌶️🌶️</option>
+              <option value="3">Extra Spicy 🌶️🌶️🌶️</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Status &amp; Flags</label>
+            <div style="display:flex;flex-direction:column;gap:0.25rem;font-size:0.85rem;">
+              <label style="font-weight:500;"><input type="checkbox" id="edit-eggfree" style="width:auto;" checked /> Egg-Free / Vegan</label>
+              <label style="font-weight:500;"><input type="checkbox" id="edit-preorder" style="width:auto;" /> Pre-Order Required</label>
+              <label style="font-weight:500;"><input type="checkbox" id="edit-soldout" style="width:auto;" /> Mark as Sold Out</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Photo (Upload from Phone/PC OR Paste Image Path/URL)</label>
+          <input type="file" id="edit-photo-file" accept="image/*" style="margin-bottom:0.4rem;" />
+          <input type="text" id="edit-photo-url" placeholder="assets/images/dish.webp or https://..." />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Save Dish</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add / Edit Festive Package Modal -->
+  <div id="edit-pkg-modal" class="modal hidden">
+    <div class="modal-card" style="max-height:92vh;overflow-y:auto;">
+      <button type="button" id="close-edit-pkg-modal" class="modal-close">&times;</button>
+      <h3>Edit Festive / CNY Package</h3>
+      <form id="admin-pkg-form" style="margin-top:0.8rem;">
+        <input type="hidden" id="pkg-id" />
+        <div class="form-group">
+          <label style="font-weight:700;"><input type="checkbox" id="pkg-active" style="width:auto;" checked /> Show Package on Public Website</label>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Badge Label</label>
+            <input type="text" id="pkg-badge" placeholder="e.g. CNY Set A" required />
+          </div>
+          <div class="form-group">
+            <label>Package Price (RM)</label>
+            <input type="number" step="0.10" id="pkg-price" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>English Title</label>
+          <input type="text" id="pkg-title-en" required />
+        </div>
+        <div class="form-group">
+          <label>Chinese Title (中文标题)</label>
+          <input type="text" id="pkg-title-zh" />
+        </div>
+
+        <!-- Quick Picker to Link Existing Menu Dishes OR Type Seasonal Dishes -->
+        <div class="form-group">
+          <label>Quick-Add Dish from Menu (Optional)</label>
+          <div style="display:flex;gap:0.4rem;">
+            <select id="menu-dish-picker"></select>
+            <button type="button" id="append-dish-to-pkg" class="btn btn-gold btn-sm">+ Add</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Included Dishes (1 dish per line — edit or add seasonal items freely)</label>
+          <textarea id="pkg-items-text" rows="6" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Booking Notes</label>
+          <input type="text" id="pkg-notes" placeholder="e.g. Pre-order 1 day ahead" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Save Package</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

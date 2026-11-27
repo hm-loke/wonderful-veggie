@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>满福德素食馆 Wonderful Veggie | Bandar Baru Klang</title>
+  <meta name="description" content="Restoran Sayur-Sayuran Wonderful Veggie (满福德素食馆) in Bandar Baru Klang. Wholesome Chinese & Nanyang vegetarian cuisine, family sets, WhatsApp table booking, GrabFood & Foodpanda." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- LocalBusiness Structured Data for Google Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Wonderful Veggie 满福德素食馆",
+    "servesCuisine": ["Vegetarian", "Vegan", "Chinese", "Malaysian"],
+    "telephone": "+6016-3360198",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "No 17-G, Jalan Tiara 2C/KU1, Pusat Perniagaan BBK, Bandar Baru Klang",
+      "addressLocality": "Klang",
+      "addressRegion": "Selangor",
+      "postalCode": "41150",
+      "addressCountry": "MY"
+    },
+    "openingHours": "Mo-Su 08:00-22:00",
+    "priceRange": "RM 10 - RM 48"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar no-print">
+    <div class="container top-bar-flex">
+      <span>📍 Bandar Baru Klang · <strong id="live-status">Open Daily 8:00 AM – 10:00 PM</strong></span>
+      <div class="top-bar-actions">
+        <button id="lang-toggle" class="lang-btn" type="button">中文 / EN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Navigation -->
+  <header class="navbar no-print">
+    <div class="container nav-flex">
+      <a href="#" class="brand">
+        <div class="medallions" aria-hidden="true">
+          <span>满</span><span>福</span><span>德</span>
+        </div>
+        <div class="brand-text">
+          <strong>素食馆</strong>
+          <small>Wonderful Veggie</small>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#packages" id="nav-packages-link" data-en="Festive Sets" data-zh="节庆套餐">Festive Sets</a>
+        <a href="#menu" data-en="Menu" data-zh="菜单">Menu</a>
+        <a href="#booking" data-en="Book / Pickup" data-zh="预订 / 自取">Book / Pickup</a>
+        <a href="#location" data-en="Location" data-zh="地址与时间">Location</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a href="#booking" class="btn btn-primary btn-sm" data-en="Book Table" data-zh="预订桌位">Book Table</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero no-print">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-medallions">
+          <span>满</span><span>福</span><span>德</span>
+        </div>
+        <h1 data-en="Wholesome Vegetarian Comfort, Crafted with Heart" data-zh="满福德素食馆 · 健康疗愈的美味素食">
+          Wholesome Vegetarian Comfort, Crafted with Heart
+        </h1>
+        <p data-en="From wok-hei tze char sharing dishes and Nanyang kopi to family gatherings and festive feasts in Bandar Baru Klang." data-zh="汇集锅气小炒、南洋古早味咖啡茶饮、家庭聚餐与节庆套餐。欢迎堂食预订、WhatsApp自取或外卖下单。">
+          From wok-hei tze char sharing dishes and Nanyang kopi to family gatherings and festive feasts in Bandar Baru Klang.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-primary" data-en="Browse Full Menu" data-zh="浏览完整菜单">Browse Full Menu</a>
+          <a id="hero-wa-btn" href="#" target="_blank" rel="noopener" class="btn btn-wa" data-en="WhatsApp Us" data-zh="WhatsApp 联系">WhatsApp Us</a>
+          <a href="#booking" class="btn btn-gold" data-en="Self-Pickup (0% Delivery Fee)" data-zh="WhatsApp 自取免外卖费">Self-Pickup (0% Delivery Fee)</a>
+        </div>
+
+        <!-- Delivery Partners Strip -->
+        <div class="delivery-strip">
+          <span class="strip-label" data-en="Prefer delivery? Order via:" data-zh="外送服务平台：">Prefer delivery? Order via:</span>
+          <a href="https://food.grab.com/my/en/restaurant/wonderful-veggie-bandar-baru-klang-delivery/1-C7CFWBEXCYETG2?" target="_blank" rel="noopener" class="partner-pill grab">
+            GrabFood
+          </a>
+          <a href="https://www.foodpanda.my/restaurant/pgwx/wonderful-veggie-bandar-baru-klang" target="_blank" rel="noopener" class="partner-pill panda">
+            foodpanda (5.0★)
+          </a>
+          <a href="https://www.facebook.com/wonderfulveggie/" target="_blank" rel="noopener" class="partner-pill fb">
+            Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Festive & CNY Packages Section (Auto-hides if none active in Admin) -->
+  <section id="packages" class="section bg-festive no-print">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow" data-en="Limited Seasonal & Family Feasts" data-zh="节庆与家庭欢聚套餐">Limited Seasonal &amp; Family Feasts</span>
+        <h2 data-en="Festive & CNY Set Packages" data-zh="新春与节庆精选套餐">Festive &amp; CNY Set Packages</h2>
+        <p data-en="Pre-book your family reunion table or festive takeaway set directly via WhatsApp." data-zh="欢迎提前通过 WhatsApp 预订团圆饭桌席或节庆外带套餐。">
+          Pre-book your family reunion table or festive takeaway set directly via WhatsApp.
+        </p>
+      </div>
+      <div id="packages-grid" class="packages-grid"></div>
+    </div>
+  </section>
+
+  <!-- Print-Only Header (Appears when exporting Menu to PDF) -->
+  <div class="print-only-header">
+    <h1>满福德素食馆 · Wonderful Veggie</h1>
+    <p>No 17-G, Jalan Tiara 2C/KU1, Pusat Perniagaan BBK, Bandar Baru Klang, 41150 Klang, Selangor</p>
+    <p>Booking Hotline: 03-3358 0228 / 016-336 0198 | Open Daily: 8:00 AM – 10:00 PM</p>
+  </div>
+
+  <!-- Interactive Menu Section -->
+  <section id="menu" class="section">
+    <div class="container">
+      <div class="section-header no-print">
+        <span class="eyebrow" data-en="Freshly Prepared Daily" data-zh="每日新鲜烹调">Freshly Prepared Daily</span>
+        <h2 data-en="Our Menu" data-zh="精选菜单">Our Menu</h2>
+        <p data-en="B(大) = Big Portion · S(小) = Small Portion · Takeaway beverage add-on RM 0.50" data-zh="B(大) = 大份 · S(小) = 小份 · 饮料打包另计 RM 0.50">
+          B(大) = Big Portion · S(小) = Small Portion · Takeaway beverage add-on RM 0.50
+        </p>
+      </div>
+
+      <!-- Search, Dietary Filter & PDF Export Controls -->
+      <div class="menu-controls no-print">
+        <div class="search-box">
+          <input type="search" id="menu-search" placeholder="Search dish name or code (e.g. Petai, R12, 猴头菇)..." />
+        </div>
+
+        <div class="diet-filters">
+          <button class="chip active" data-diet="all" data-en="All" data-zh="全部">All</button>
+          <button class="chip" data-diet="egg-free" data-en="Egg-Free / Vegan" data-zh="纯素 / 无蛋">Egg-Free / Vegan</button>
+          <button class="chip" data-diet="spicy" data-en="Spicy 🌶️" data-zh="辣味 🌶️">Spicy 🌶️</button>
+          <button class="chip" data-diet="preorder" data-en="Pre-Order" data-zh="需预订">Pre-Order</button>
+          <button id="export-pdf-btn" class="btn btn-outline btn-sm" type="button" data-en="📄 Export Menu PDF" data-zh="📄 导出 PDF 菜单">
+            📄 Export Menu PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="category-tabs no-print" id="category-tabs">
+        <button class="tab-btn active" data-cat="all" data-en="All Items" data-zh="全部菜品">All Items</button>
+        <button class="tab-btn" data-cat="signatures" data-en="Chef Specials" data-zh="招牌特色">Chef Specials</button>
+        <button class="tab-btn" data-cat="dishes" data-en="Sharing Dishes & Tofu" data-zh="小炒与豆腐">Sharing Dishes &amp; Tofu</button>
+        <button class="tab-btn" data-cat="snacks" data-en="Snacks & Sides" data-zh="小食点心">Snacks &amp; Sides</button>
+        <button class="tab-btn" data-cat="rice" data-en="Rice Dishes" data-zh="饭类">Rice Dishes</button>
+        <button class="tab-btn" data-cat="noodles" data-en="Noodles & Pasta" data-zh="面食意粉">Noodles &amp; Pasta</button>
+        <button class="tab-btn" data-cat="beverages" data-en="Beverages & Tea" data-zh="饮品与茶壶">Beverages &amp; Tea</button>
+      </div>
+
+      <div id="menu-count" class="menu-count no-print"></div>
+      <div id="menu-grid" class="menu-grid"></div>
+    </div>
+  </section>
+
+  <!-- Table Reservation & Commission-Free WhatsApp Self-Pickup Section -->
+  <section id="booking" class="section bg-cream no-print">
+    <div class="container booking-grid">
+      <div class="booking-copy">
+        <span class="eyebrow" data-en="Direct & Zero-Commission" data-zh="直接联系 · 零佣金">Direct &amp; Zero-Commission</span>
+        <h2 data-en="Reserve a Table or Order Self-Pickup" data-zh="预订桌位或 WhatsApp 自取下单">Reserve a Table or Order Self-Pickup</h2>
+        <p data-en="Skip delivery markups by pre-ordering self-pickup via WhatsApp, or book a table ahead for family gatherings." data-zh="通过 WhatsApp 提前预订堂食桌位，或直接下单到店自取，免除第三方平台额外费用。">
+          Skip delivery markups by pre-ordering self-pickup via WhatsApp, or book a table ahead for family gatherings.
+        </p>
+
+        <div class="contact-cards">
+          <div class="mini-card">
+            <strong>📱 WhatsApp / Mobile</strong>
+            <a id="direct-wa-link" href="#" target="_blank" rel="noopener">016-336 0198</a>
+          </div>
+          <div class="mini-card">
+            <strong>☎️ Restaurant Landline</strong>
+            <a href="tel:+60333580228">03-3358 0228</a>
+          </div>
+        </div>
+      </div>
+
+      <form id="booking-form" class="card-form">
+        <div class="mode-switch">
+          <button type="button" class="mode-btn active" data-mode="Dine-In Table Booking" data-en="🍽️ Table Booking" data-zh="🍽️ 堂食订座">🍽️ Table Booking</button>
+          <button type="button" class="mode-btn" data-mode="Self-Pickup Order" data-en="🛍️ Self-Pickup Order" data-zh="🛍️ 到店自取">🛍️ Self-Pickup Order</button>
+        </div>
+        <input type="hidden" id="booking-mode" value="Dine-In Table Booking" />
+
+        <div class="form-group">
+          <label for="cust-name" data-en="Your Name" data-zh="您的称呼">Your Name</label>
+          <input type="text" id="cust-name" placeholder="e.g. Mr. Tan / 陈先生" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cust-date" data-en="Date" data-zh="日期">Date</label>
+            <input type="date" id="cust-date" required />
+          </div>
+          <div class="form-group">
+            <label for="cust-time" data-en="Time" data-zh="时间">Time</label>
+            <input type="time" id="cust-time" required />
+          </div>
+        </div>
+
+        <div class="form-row" id="pax-row">
+          <div class="form-group">
+            <label for="cust-pax" data-en="Number of Pax" data-zh="人数">Number of Pax</label>
+            <input type="number" id="cust-pax" min="1" max="50" value="4" />
+          </div>
+          <div class="form-group">
+            <label for="cust-diet" data-en="Dietary Preference" data-zh="饮食要求">Dietary Preference</label>
+            <select id="cust-diet">
+              <option value="Standard Vegetarian">Standard Vegetarian (常规素食)</option>
+              <option value="Pure Vegan (No Egg/Dairy)">No Egg / Dairy (纯素无蛋奶)</option>
+              <option value="Buddhist Strict (No Alliums)">No Garlic / Onion (五辛不食)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cust-notes" data-en="Dish Pre-Order / Special Notes" data-zh="预点菜品 / 备注">Dish Pre-Order / Special Notes</label>
+          <textarea id="cust-notes" rows="3" placeholder="e.g. 1x R12 Petai Fried Rice, 1x M12 Yam Basket (S), or baby chair needed..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-wa btn-full" data-en="Send Request via WhatsApp" data-zh="发送至 WhatsApp">
+          Send Request via WhatsApp
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Location & Footer -->
+  <footer id="location" class="footer no-print">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand footer-brand">
+          <div class="medallions"><span>满</span><span>福</span><span>德</span></div>
+          <div class="brand-text">
+            <strong>素食馆</strong>
+            <small>Wonderful Veggie</small>
+          </div>
+        </div>
+        <p class="footer-addr">
+          No 17-G, Jalan Tiara 2C/KU1,<br />
+          Pusat Perniagaan BBK, Bandar Baru Klang,<br />
+          41150 Klang, Selangor Darul Ehsan.
+        </p>
+        <p class="footer-hours"><strong>Hours:</strong> Daily 8:00 AM – 10:00 PM</p>
+        <div class="footer-links">
+          <a href="https://maps.google.com/?q=17-G,+Jalan+Tiara+2C,+Bandar+Baru+Klang,+41150+Klang,+Selangor" target="_blank" rel="noopener" class="btn btn-gold btn-sm">Google Maps</a>
+          <a href="https://www.facebook.com/wonderfulveggie/" target="_blank" rel="noopener" class="btn btn-outline-light btn-sm">Facebook</a>
+          <a href="admin.html" class="admin-link">Staff Admin</a>
+        </div>
+      </div>
+
+      <div class="map-box">
+        <iframe
+          title="Wonderful Veggie Bandar Baru Klang Map"
+          src="https://www.google.com/maps?q=17-G,+Jalan+Tiara+2C,+Bandar+Baru+Klang,+41150+Klang,+Selangor&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Package Booking Modal -->
+  <div id="pkg-modal" class="modal hidden no-print" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button type="button" id="close-pkg-modal" class="modal-close" aria-label="Close">&times;</button>
+      <h3 id="modal-pkg-title">Book Package</h3>
+      <p id="modal-pkg-price" class="modal-price"></p>
+      <form id="pkg-booking-form">
+        <input type="hidden" id="selected-pkg-name" />
+        <input type="hidden" id="selected-pkg-price" />
+        <div class="form-group">
+          <label>Your Name / 称呼</label>
+          <input type="text" id="pkg-cust-name" required placeholder="e.g. Ms. Lim" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date / 日期</label>
+            <input type="date" id="pkg-date" required />
+          </div>
+          <div class="form-group">
+            <label>Time / 时间</label>
+            <input type="time" id="pkg-time" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Dining Type / 用餐方式</label>
+            <select id="pkg-type">
+              <option value="Dine-In (堂食)">Dine-In (堂食)</option>
+              <option value="Takeaway (外带)">Takeaway (外带)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tables / Sets (数量)</label>
+            <input type="number" id="pkg-qty" min="1" max="20" value="1" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Notes / 备注</label>
+          <input type="text" id="pkg-notes" placeholder="e.g. No egg/dairy, extra rice..." />
+        </div>
+        <button type="submit" class="btn btn-wa btn-full">Confirm Booking on WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Button -->
+  <a id="floating-wa" href="#" target="_blank" rel="noopener" class="floating-wa no-print">
+    💬 WhatsApp
+  </a>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
